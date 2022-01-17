@@ -1,2 +1,4 @@
-# hazelcast-playground
-Work in progress 
+# hazelcast
+Work in progress - two projects
+
+# kafka
