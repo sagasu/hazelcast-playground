@@ -12,7 +12,7 @@ namespace KafkaProducer
 
             var config = new ProducerConfig
             {
-                BootstrapServers = "localhost:9092,localhost:9092",
+                BootstrapServers = "localhost:9092",
                 ClientId = Dns.GetHostName(),
                 
             };
@@ -33,7 +33,12 @@ namespace KafkaProducer
                         Console.WriteLine($"Wrote to offset: {task.Result.Offset}");
                     }
                 });
+                var numProduced = 1;
+                producer.Flush(TimeSpan.FromSeconds(10));
+                Console.WriteLine($"{numProduced} messages were produced to topic topic");
             }
+
+
         }
     }
 }
