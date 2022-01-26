@@ -19,7 +19,7 @@ namespace KafkaClient
             var admin = new AdminClientBuilder(config);
             var client = admin.Build();
             var groups = client.ListGroups(TimeSpan.FromMinutes(1));
-
+            Console.ReadLine();
             //ListenToTopic();
         }
 
