@@ -2,6 +2,10 @@
 using System.Threading;
 using Confluent.Kafka;
 
+using Confluent.Kafka.Admin;
+
+
+
 namespace KafkaClient
 {
     class Program
@@ -10,6 +14,17 @@ namespace KafkaClient
         {
             Console.WriteLine("Hello World!");
 
+            var config = new AdminClientConfig();
+            config.BootstrapServers = "localhost:9092";
+            var admin = new AdminClientBuilder(config);
+            var client = admin.Build();
+            var groups = client.ListGroups(TimeSpan.FromMinutes(1));
+
+            //ListenToTopic();
+        }
+
+        private static void ListenToTopic()
+        {
             var config = new ConsumerConfig
             {
                 BootstrapServers = "localhost:9092",
@@ -25,9 +40,8 @@ namespace KafkaClient
                 {
                     var consumeResult = consumer.Consume(CancellationToken.None);
                     Console.WriteLine(consumeResult.Message.Value);
-                    
-                    // handle consumed message.
 
+                    // handle consumed message.
                 }
 
                 consumer.Close();
