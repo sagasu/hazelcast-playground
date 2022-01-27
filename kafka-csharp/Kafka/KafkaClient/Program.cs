@@ -14,13 +14,33 @@ namespace KafkaClient
         {
             Console.WriteLine("Hello World!");
 
+            ListAllTopicsAndGroups();
+            ListenToTopic();
+        }
+
+        private static void ListAllTopicsAndGroups()
+        {
             var config = new AdminClientConfig();
             config.BootstrapServers = "localhost:9092";
             var admin = new AdminClientBuilder(config);
-            var client = admin.Build();
-            var groups = client.ListGroups(TimeSpan.FromMinutes(1));
-            Console.ReadLine();
-            //ListenToTopic();
+
+            using (var client = admin.Build())
+            {
+                var topics = client.GetMetadata(TimeSpan.FromMinutes(1)).Topics;
+                Console.WriteLine("List of Topics");
+                foreach (var topicMetadata in topics)
+                {
+                    Console.WriteLine(topicMetadata.Topic);
+                }
+
+                Console.WriteLine("List of Groups");
+                var groups = client.ListGroups(TimeSpan.FromMinutes(1));
+                foreach (var groupInfo in groups)
+                {
+                    Console.WriteLine(groupInfo.Group);
+                }
+                Console.ReadLine();
+            }
         }
 
         private static void ListenToTopic()
@@ -35,7 +55,6 @@ namespace KafkaClient
             using (var consumer = new ConsumerBuilder<Ignore, string>(config).Build())
             {
                 consumer.Subscribe(topics);
-
                 while (true)
                 {
                     var consumeResult = consumer.Consume(CancellationToken.None);
