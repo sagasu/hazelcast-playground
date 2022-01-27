@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using System.Threading.Tasks;
 using Confluent.Kafka;
 
 using Confluent.Kafka.Admin;
@@ -14,8 +15,23 @@ namespace KafkaClient
         {
             Console.WriteLine("Hello World!");
 
+
             ListAllTopicsAndGroups();
             ListenToTopic();
+        }
+
+        private static async Task CreateTopic()
+        {
+            var config = new AdminClientConfig();
+            config.BootstrapServers = "localhost:9092";
+            var admin = new AdminClientBuilder(config);
+
+            using (var client = admin.Build())
+            {
+                var ts = new TopicSpecification(){Name = "topic", NumPartitions = 2, ReplicationFactor = 1};
+                var to = new CreateTopicsOptions();
+                await client.CreateTopicsAsync(new[] {ts}, to);
+            }
         }
 
         private static void ListAllTopicsAndGroups()
