@@ -6,7 +6,7 @@ To see all docker containers running on your machine, notice that `-a` is import
 `docker stop kafka`  
 `docker rm kafka`  
   
-If you see error: `docker: Error response from daemon: Conflict. The container name "/kafka" is already in use by container`, make sure you `stop` the image and then remove it. Or you can just connect to it if everything is fine like:
+If you see error: `docker: Error response from daemon: Conflict. The container name "/kafka" is already in use by container`, make sure you `stop` the image and then remove it. Or you can just connect to it if everything is fine like:  
 `docker start -a kafka`  
 `docker start -a zookeeper`  
   
