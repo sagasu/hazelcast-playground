@@ -1,4 +1,8 @@
 # run  
+`node topic.js`  
+
+# setup kafka  
+
 Notice that we are not using here docker-compose, we are running all the docker images in different terminals, you can always add `-d` and run it in one, but I just like it that way.  
 
 To see all docker containers running on your machine, notice that `-a` is important. Because after first time you run the `run` command you need to stop the image and remove it if it is problematic.  
