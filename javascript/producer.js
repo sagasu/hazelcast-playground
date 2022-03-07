@@ -15,7 +15,7 @@ const run = async () => {
         // This is not necessary it is for fun to control the partition according to rule A-M=0, N-Z=1
         const partition = msg[0] < "N" ? 0 : 1;
         // notice no key here, but we play with partitions we don't have to, it is for fun :)
-        await producer.send({
+        const result = await producer.send({
             "topic": "Users",
             "messages":[
                 {
@@ -24,6 +24,8 @@ const run = async () => {
                 }
             ]
         });
+
+        console.log(`Message sent to Kafka ${JSON.stringify(result)}`);
         await producer.disconnect();
 
     }catch(e){

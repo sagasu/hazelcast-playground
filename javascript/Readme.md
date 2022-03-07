@@ -1,6 +1,6 @@
 # run  
 * topic.js creates a topic in kafka cluster, to run :`node topic.js`  
-* producer.js produces events to topic created by topic.js, to run: `node producer.js`  
+* producer.js produces events to topic created by topic.js, to run: `node producer.js Adam` or `node producer.js Zed` notice that there is extra parameter that is a key to select a partition.    
 *
 
 # setup kafka  
