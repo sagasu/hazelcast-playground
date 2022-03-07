@@ -1,5 +1,7 @@
 # run  
-`node topic.js`  
+* topic.js creates a topic in kafka cluster, to run :`node topic.js`  
+* producer.js produces events to topic created by topic.js, to run: `node producer.js`  
+*
 
 # setup kafka  
 
